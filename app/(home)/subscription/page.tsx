@@ -161,7 +161,8 @@ export default function SubscriptionsPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">No Subscription Plans</h3>
               <p className="text-gray-500 max-w-sm mb-8">
-                You haven't created any subscription plans yet. Get started by creating your first plan.
+                
+                You haven&apos;t created any subscription plans yet. Get started by creating your first plan.
               </p>
               <Button 
                 className="bg-[#590054] hover:bg-[#590054]/90 text-white rounded-md px-6"

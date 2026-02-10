@@ -79,7 +79,7 @@ export function EditSubscription({ open, onOpenChange, plan }: EditSubscriptionP
     },
   });
 
-  const { fields, append, remove, replace } = useFieldArray({
+  const { fields, append, remove} = useFieldArray({
     control: form.control,
     name: "features",
   });
