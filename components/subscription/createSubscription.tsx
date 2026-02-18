@@ -26,6 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ApiResponseError } from "@/interfaces/axios";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateSubscriptionProps {
   open: boolean;
@@ -34,7 +35,7 @@ interface CreateSubscriptionProps {
 
 const featureSchema = z.object({
   feature_name: z.string().min(1, "Feature name is required"),
-  feature_value: z.string().min(1, "Feature value is required"),
+  feature_value: z.string().min(0, "Feature value is required"),
 });
 
 const subscriptionSchema = z.object({
@@ -61,6 +62,8 @@ export function CreateSubscription({ open, onOpenChange }: CreateSubscriptionPro
     },
   });
 
+  const queryClient = useQueryClient();
+
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "features",
@@ -75,6 +78,7 @@ export function CreateSubscription({ open, onOpenChange }: CreateSubscriptionPro
     try {
       await mutateAsync(values);
       toast.success("Plan created successfully");
+      queryClient.invalidateQueries({ queryKey: ["billing/plans/"] });
       form.reset();
       onOpenChange(false);
     } catch (error) {

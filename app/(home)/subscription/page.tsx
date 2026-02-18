@@ -41,7 +41,7 @@ interface PlansResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  result: Plan[];
+  results: Plan[];
 }
 
 interface Invoice {
@@ -154,7 +154,7 @@ export default function SubscriptionsPage() {
              <div className="flex justify-center items-center h-64">
                <Loader2 className="w-8 h-8 animate-spin text-[#590054]" />
              </div>
-          ) : !plansData?.result || plansData.result.length === 0 ? (
+          ) : !plansData?.results || plansData.results.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/50">
               <div className="bg-white p-4 rounded-full mb-4 shadow-sm border border-gray-100">
                 <Plus className="w-8 h-8 text-[#590054]" />
@@ -173,8 +173,8 @@ export default function SubscriptionsPage() {
             </div>
           ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {plansData?.result?.map((plan, index) => (
-              <Card key={plan.id || index} className="p-8 border border-gray-200 shadow-none rounded-lg flex flex-col items-center text-center relative">
+            {plansData?.results?.map((plan, index) => (
+              <Card key={plan.id || index} className="p-8 border border-gray-200 shadow-none rounded-[24px] flex flex-col items-center text-center relative">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -195,10 +195,10 @@ export default function SubscriptionsPage() {
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-3">
                       <span className="shrink-0 w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center">
-                        <Check className="w-3.5 h-3.5 text-[#590054]" />
+                        <Check className="w-4 h-34 text-[#590054]" />
                       </span>
-                      <span className="text-gray-900 text-sm font-medium">
-                        {feature.feature_name}: {feature.feature_value}
+                      <span className="text-gray-900 text-[16px] font-medium">
+                        {feature.feature_name}  {feature.feature_value}
                       </span>
                     </li>
                   ))}
@@ -206,7 +206,7 @@ export default function SubscriptionsPage() {
                 
                 <Button 
                   variant="outline" 
-                  className="w-full border-[#590054] text-[#590054] hover:bg-purple-50 mt-auto py-5 font-bold"
+                  className="w-full border-[#590054] text-[#590054] hover:bg-purple-50 mt-auto py-5 font-bold my-10"
                   onClick={() => handleEditPlan(plan)}
                 > 
                   Edit plan
